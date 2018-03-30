@@ -35,8 +35,12 @@ public class AppUserController {
         if (appUserRepository.findByEmail(user.getEmail()) != null) {
             throw new IllegalArgumentException("User with provided email already exists!");
         }
+        if (appUserRepository.findByEmail(user.getEmail()) != null) {
+            throw new IllegalArgumentException("Login already exists!");
+        }
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setUsername(Jsoup.parse(user.getUsername()).text());
+        user.setLogin(Jsoup.parse(user.getLogin()).text());
         user.setEmail(Jsoup.parse(user.getEmail()).text());
         user.setRole(user.getRole());
         user.setEnabled(user.getEnabled());

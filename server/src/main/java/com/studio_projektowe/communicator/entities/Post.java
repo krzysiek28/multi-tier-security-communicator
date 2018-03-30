@@ -1,6 +1,7 @@
 package com.studio_projektowe.communicator.entities;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Time;
 
 @Entity
@@ -8,21 +9,23 @@ public class Post {
     @Id
     @GeneratedValue
     Integer id;
-    @ManyToOne
+/*    @ManyToOne
     Conversation conversation;
     @OneToOne
-    AppUser postOwner;
+    AppUser postOwner;*/
     Time time;
     String text;
+    Date date;
 
     public Post() {
     }
 
-    public Post(Conversation conversation, AppUser postOwner, Time time, String text) {
-        this.conversation = conversation;
-        this.postOwner = postOwner;
+    public Post(/*Conversation conversation, AppUser postOwner,*/ Time time, String text, Date date) {
+/*        this.conversation = conversation;
+        this.postOwner = postOwner;*/
         this.time = time;
         this.text = text;
+        this.date = date;
     }
 
     public Integer getId() {
@@ -33,7 +36,7 @@ public class Post {
         this.id = id;
     }
 
-    public Conversation getConversation() {
+/*    public Conversation getConversation() {
         return conversation;
     }
 
@@ -47,7 +50,7 @@ public class Post {
 
     public void setPostOwner(AppUser postOwner) {
         this.postOwner = postOwner;
-    }
+    }*/
 
     public Time getTime() {
         return time;
@@ -63,5 +66,13 @@ public class Post {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

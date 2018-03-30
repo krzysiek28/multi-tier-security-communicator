@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: krzys
-  Date: 25.03.2018
-  Time: 18:06
+  Date: 29.03.2018
+  Time: 11:24
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -29,24 +29,25 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Home</a>
+    <a class="navbar-brand" href="/homeLogged">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
 
-        </ul>
+    <div class="nick" style="padding-right: 10px; color: white">
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+            <h4>You are logged as: ${pageContext.request.userPrincipal.name}</h4>
+        </c:if>
     </div>
+
     <!-- naval with buttons -->
     <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary" name="login" onclick="window.location.href='/loginPage'">Zaloguj się</button>
-        <button type="button" class="btn btn-secondary" name="signup" onclick="window.location.href='/registrationPage'">Stwórz konto</button>
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='/logout'">Wyloguj się</button>
     </div>
 </nav>
 
 
-Simple Site
+Logged Site
 
 
 

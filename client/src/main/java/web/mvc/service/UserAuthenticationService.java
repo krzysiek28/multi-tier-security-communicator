@@ -21,7 +21,7 @@ public class UserAuthenticationService {
             @Override
             public Key resolveSigningKey(JwsHeader header, Claims claims) {
                 user[0] = claims.getSubject();
-                return null; // will throw exception, can be caught in caller
+                return null;
             }
         };
 
@@ -30,9 +30,7 @@ public class UserAuthenticationService {
                     .setSigningKeyResolver(signingKeyResolver)
                     .parseClaimsJws(rawToken)
                     .getBody();
-        } catch (Exception e) {
-            // no signing key on client. We trust that this JWT came from the server and has been verified there
-        }
+        } catch (Exception e) {}
         this.username = user[0];
     }
 

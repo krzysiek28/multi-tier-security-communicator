@@ -9,25 +9,25 @@ public class Conversation {
     @Id
     @GeneratedValue
     Integer id;
-    @OneToMany
+/*    @OneToMany
     AppUser appUser;
     @OneToOne
-    AppUser owner;
+    AppUser owner;*/
     @JsonIgnore
     String password;
-    @OneToMany
-    Post post;
+   /* @OneToMany
+    Post post;*/
     //groups
 
 
     public Conversation() {
     }
 
-    public Conversation(AppUser appUser, AppUser owner, String password, Post post) {
-        this.appUser = appUser;
-        this.owner = owner;
+    public Conversation(/*AppUser appUser, AppUser owner,*/ String password/*, Post post*/) {
+/*        this.appUser = appUser;
+        this.owner = owner;*/
         this.password = password;
-        this.post = post;
+//        this.post = post;
     }
 
     public Integer getId() {
@@ -38,7 +38,7 @@ public class Conversation {
         this.id = id;
     }
 
-    public AppUser getAppUser() {
+/*    public AppUser getAppUser() {
         return appUser;
     }
 
@@ -52,7 +52,7 @@ public class Conversation {
 
     public void setOwner(AppUser owner) {
         this.owner = owner;
-    }
+    }*/
 
     @JsonIgnore
     public String getPassword() {
@@ -63,11 +63,11 @@ public class Conversation {
         this.password = password;
     }
 
-    public Post getPost() {
+/*    public Post getPost() {
         return post;
     }
 
     public void setPost(Post post) {
         this.post = post;
-    }
+    }*/
 }

@@ -26,7 +26,7 @@ public class AppUser {
 
     public AppUser() {}
 
-    public AppUser(String username, String login, String password, String email, String role, String personalData, Boolean enabled) {
+    public AppUser(String username, String login, String password, String email, String role, String personalData, Boolean enabled/*, AppUser contacts*/) {
         this.username = username;
         this.login = login;
         this.password = password;
@@ -34,6 +34,18 @@ public class AppUser {
         this.role = role;
         this.personalData = personalData;
         this.enabled = enabled;
+    }
+
+    public AppUser(Integer id, String username, String login, String password, String email, String role, String personalData, Boolean enabled/*, AppUser contacts*/) {
+        this.id = id;
+        this.username = username;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.personalData = personalData;
+        this.enabled = enabled;
+//        this.contacts = contacts;
     }
 
     public Integer getId() {
