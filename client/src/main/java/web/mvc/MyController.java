@@ -120,6 +120,6 @@ public class MyController {
             return "redirect:/registrationPage?error=yes&message=" + errorType;
         }
 
-        return "redirect:/chooseFirm";
+        return "redirect:/homeLogged";
     }
 }
