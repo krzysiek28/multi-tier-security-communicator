@@ -82,11 +82,11 @@ public class MyController {
         try {
             obj = new JSONObject(ex.getResponseBodyAsString());
             String errorMessage = obj.getString("message");
-            return "redirect:/chooseFirm?error="+errorMessage;
+            return "redirect:/homeLogged?error="+errorMessage;
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return"redirect:/chooseFirm?error=Nieoczekiwany błąd!";
+        return"redirect:/homeLogged?error=Nieoczekiwany błąd!";
     }
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
