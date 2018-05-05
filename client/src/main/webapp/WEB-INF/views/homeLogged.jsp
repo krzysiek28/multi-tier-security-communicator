@@ -55,7 +55,7 @@
 <h3>Prywatny komunikator</h3>
 <br>
 <div class="btn-group" role="group">
-    <button type="button" class="btn btn-secondary" name="conversationList" onclick="">Zobacz listę konwersacji</button>
+    <button type="button" class="btn btn-secondary" name="conversationList" onclick="window.location.href='/conversations'">Zobacz listę konwersacji</button>
     <button type="button" class="btn btn-secondary" name="addConversation" onclick="window.location.href='/addConversation'">Dodaj konwersację</button>
 </div>
 
@@ -71,18 +71,14 @@
         <div>
             <th>Id</th>
             <th>Nazwa</th>
-            <th></th>
         </div>
 
         </thead>
         <tbody>
-        <c:forEach var="conv" items="${conversation}">
+        <c:forEach var="conv" items="${conversations}">
             <tr>
                 <td align="center" style="width: 20%">${conv.id}</td>
                 <td align="center">${conv.name}</td>
-                <td style="width: 159px">
-
-                </td>
             </tr>
 
         </c:forEach>

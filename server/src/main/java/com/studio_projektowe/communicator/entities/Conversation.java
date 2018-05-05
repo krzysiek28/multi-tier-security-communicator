@@ -22,7 +22,7 @@ public class Conversation {
     private String password;
 
     @Column(name ="userId")
-    private String userId; //conversation owner's id
+    private Integer userId; //conversation owner's id
 
 
     @ManyToMany(cascade = {CascadeType.ALL})
@@ -73,11 +73,11 @@ public class Conversation {
     }
 
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
