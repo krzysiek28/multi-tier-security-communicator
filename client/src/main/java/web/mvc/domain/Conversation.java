@@ -1,52 +1,28 @@
-package com.studio_projektowe.communicator.entities;
+package web.mvc.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table (name = "conversation")
 public class Conversation {
 
-    @Id
-    @GeneratedValue
-    @JsonIgnore
     private Integer id;
-
-    @Column(unique=true, name="name")
     private String name;
-
-    @Column(name = "password")
     private String password;
-
-    @Column(name ="userId")
     private String userId; //conversation owner's id
-
-
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "Usr_Con",
-            joinColumns = {@JoinColumn(name = "userId")},
-            inverseJoinColumns = {@JoinColumn(name = "conversation_id")}
-    )
-    @JsonIgnore
     Set<AppUser> appUsers = new HashSet<>();
-
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "Post_con",
-            joinColumns = {@JoinColumn(name = "message_id")},
-            inverseJoinColumns = {@JoinColumn(name = "conversation_id")}
-    )
-    @JsonIgnore
     Set<Post> posts = new HashSet<>();
-
 
     public Conversation() {
     }
 
+    public Conversation(Integer id, String name, String password, String userId, Set<AppUser> appUsers, Set<Post> posts) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.userId = userId;
+        this.appUsers = appUsers;
+        this.posts = posts;
+    }
 
     public Integer getId() {
         return id;
@@ -72,7 +48,6 @@ public class Conversation {
         this.password = password;
     }
 
-
     public String getUserId() {
         return userId;
     }
@@ -81,11 +56,11 @@ public class Conversation {
         this.userId = userId;
     }
 
-    public Set<AppUser> getUsers() {
+    public Set<AppUser> getAppUsers() {
         return appUsers;
     }
 
-    public void setUsers(Set<AppUser> appUsers) {
+    public void setAppUsers(Set<AppUser> appUsers) {
         this.appUsers = appUsers;
     }
 

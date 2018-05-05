@@ -14,6 +14,8 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
 import web.mvc.service.AppUserService;
+import web.mvc.service.ConversationService;
+import web.mvc.service.MessageService;
 import web.mvc.service.UserAuthenticationService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +29,10 @@ public class MyController {
     AppUserService appUserService;
     @Autowired
     UserAuthenticationService userAuthenticationService;
+    @Autowired
+    ConversationService conversationService;
+    @Autowired
+    MessageService messageService;
 
     @RequestMapping(value = "/")
     public String homePage(ModelMap model) {
@@ -66,9 +72,27 @@ public class MyController {
     }
 
     @RequestMapping(value = "/homeLogged")
-    public String homeLoged(ModelMap model) throws URISyntaxException, JSONException, IOException {
+    public String homeLogged(ModelMap model) throws URISyntaxException, JSONException, IOException {
         model.addAttribute("authservice", userAuthenticationService);
         return "homeLogged";
+    }
+
+    @RequestMapping(value = "/addConversation")
+    public String addConversation(ModelMap model) throws URISyntaxException, JSONException, IOException {
+        model.addAttribute("authservice", userAuthenticationService);
+        return "addConversation";
+    }
+
+    @RequestMapping(value = "/conversation", method = RequestMethod.POST)
+    public String conversation(@RequestParam  String name, @RequestParam String password) throws URISyntaxException, JSONException, IOException {
+        conversationService.addConversation(name, password);
+        return "conversation";
+    }
+
+    @RequestMapping(value = "/newMessage", method = RequestMethod.POST)
+    public String postMessage(@RequestParam String message) throws URISyntaxException, JSONException, IOException {
+        messageService.postMessage("abc", message);
+        return "conversation";
     }
 
     @RequestMapping(value = "/registrationPage")

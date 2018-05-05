@@ -7,7 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "AppUser")
 public class AppUser {
+
     @Id
     @GeneratedValue
     private Integer id;
@@ -24,9 +26,12 @@ public class AppUser {
     private String personalData;
     private Boolean enabled;
 
+
+
     public AppUser() {}
 
-    public AppUser(String username, String login, String password, String email, String role, String personalData, Boolean enabled/*, AppUser contacts*/) {
+
+    public AppUser(String username, String login, String password, String email, String role, String personalData, Boolean enabled) {
         this.username = username;
         this.login = login;
         this.password = password;
@@ -36,7 +41,7 @@ public class AppUser {
         this.enabled = enabled;
     }
 
-    public AppUser(Integer id, String username, String login, String password, String email, String role, String personalData, Boolean enabled/*, AppUser contacts*/) {
+    public AppUser(Integer id, String username, String login, String password, String email, String role, String personalData, Boolean enabled) {
         this.id = id;
         this.username = username;
         this.login = login;
@@ -45,7 +50,6 @@ public class AppUser {
         this.role = role;
         this.personalData = personalData;
         this.enabled = enabled;
-//        this.contacts = contacts;
     }
 
     public Integer getId() {

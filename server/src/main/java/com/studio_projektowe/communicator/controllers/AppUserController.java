@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import static com.studio_projektowe.communicator.security.SecurityUtils.HEADER_STRING;
 import static com.studio_projektowe.communicator.security.SecurityUtils.TOKEN_PREFIX;
 
+/**
+ * UserController is controller which is responsible for
+ * handle all requests user related
+ */
 @RestController
 @RequestMapping("/users")
 public class AppUserController {
@@ -21,12 +25,26 @@ public class AppUserController {
     private final AppUserService appUserService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    /**
+     *
+     * @param appUserRepository
+     * @param bCryptPasswordEncoder class responsible for encrytping passwords
+     * @param appUserService
+     */
     public AppUserController(AppUserRepository appUserRepository, AppUserService appUserService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.appUserRepository = appUserRepository;
         this.appUserService = appUserService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    /**
+     * method which allows user to sign up
+     * method checks if user with same data exsist
+     * if not create new user
+     *
+     * @param user json with all user data
+     * @param res http response
+     */
     @PostMapping("/sign-up")
     public void signUp(@RequestBody AppUser user, HttpServletResponse res) {
         if (appUserRepository.findByUsername(user.getUsername()) != null) {
@@ -49,14 +67,35 @@ public class AppUserController {
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + SecurityUtils.generateToken(user.getUsername()));
     }
 
+    /**
+     * method finds and returns user by username
+     * @param username
+     * @return
+     */
     @RequestMapping("/{username}")
     public AppUser getUserByUsername(@PathVariable String username) {
         AppUser user = appUserService.getUserByUsername(username);
         return user;
     }
 
+    /**
+     * method finds and returns user by id
+     *
+     * @param userId
+     * @return
+     */
     @RequestMapping("/id/{userId}")
     public AppUser getUser(@PathVariable String userId) {
         return appUserService.getUser(Integer.parseInt(userId));
+    }
+
+    /**
+     * method delete user by id
+     *
+     * @param userId
+     */
+    @RequestMapping("/delete/{userId}")
+    public void deleteUser(@PathVariable String userId) {
+        appUserService.deleteUser(Integer.parseInt(userId));
     }
 }

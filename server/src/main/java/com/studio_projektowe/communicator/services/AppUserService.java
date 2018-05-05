@@ -6,7 +6,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AppUserService {
-    private AppUserRepository appUserRepository;
+    private final AppUserRepository appUserRepository;
+
+    public AppUserService(AppUserRepository appUserRepository) {
+        this.appUserRepository = appUserRepository;
+    }
 
     public AppUser getUser(Integer userId) {
         if (!appUserRepository.exists(userId)) {

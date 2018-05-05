@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: krzys
-  Date: 29.03.2018
-  Time: 11:24
+  Date: 25.03.2018
+  Time: 18:06
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -25,72 +25,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
-<html>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/homeLogged">Home</a>
+    <a class="navbar-brand" href="/">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
 
         </ul>
     </div>
-
-    <div class="nick" style="padding-right: 10px; color: white">
-        <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <h4>Zalogowano jako: ${pageContext.request.userPrincipal.name}</h4>
-        </c:if>
-    </div>
-
-    <!-- naval with buttons -->
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary" onclick="window.location.href='/logout'">Wyloguj się</button>
-    </div>
 </nav>
 
-<h3>Prywatny komunikator</h3>
-<br>
-<div class="btn-group" role="group">
-    <button type="button" class="btn btn-secondary" name="conversationList" onclick="">Zobacz listę konwersacji</button>
-    <button type="button" class="btn btn-secondary" name="addConversation" onclick="window.location.href='/addConversation'">Dodaj konwersację</button>
-</div>
+<h3>Napisz coś!</h3>
+<form action="/newMessage" method="post">
+    <div class="text-center">
+    <textarea rows="20" cols="100" id="conversation" readonly>
 
-<%--container--%>
-<div class="conversations-list">
-    <c:if test="${param.error != null}">
-        <div  style="width:900px; margin:0 auto; margin-top: 10px; margin-bottom: 10px;"class="alert alert-danger">
-            <p><c:out value="${param.error}"/></p>
-        </div>
-    </c:if>
-    <table class="table" border="1">
-        <thead class="thead-dark" align="center">
-        <div>
-            <th>Id</th>
-            <th>Nazwa</th>
-            <th></th>
-        </div>
+    </textarea>
+    <div class="input-group input-sm text-input col-md-8 center-block">
+        <input type="text" class="form-control" id="message" name="message" />
+    </div>
+    <br>
+    <button class="btn btn-secondary" type="submit"> Wyślij </button>
+    </div>
+</form>
 
-        </thead>
-        <tbody>
-        <c:forEach var="conv" items="${conversation}">
-            <tr>
-                <td align="center" style="width: 20%">${conv.id}</td>
-                <td align="center">${conv.name}</td>
-                <td style="width: 159px">
-
-                </td>
-            </tr>
-
-        </c:forEach>
-        </tbody>
-    </table>
-
-
-</div>
 
 
 <!-- Optional JavaScript -->
