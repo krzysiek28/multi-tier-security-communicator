@@ -32,9 +32,10 @@ public class ConversationController {
     public String conversationsList(HttpServletRequest request, ModelMap modelMap) throws JSONException, IOException, URISyntaxException {
         try {
             List<Conversation> conversations = conversationService.getConversations();
-            System.out.println("juz nie");
-            Collections.sort(conversations, Comparator.comparingInt(Conversation::getId));
-            modelMap.addAttribute("authservice", userAuthenticationService);
+            System.out.println(conversations);
+//            Collections.sort(conversations, Comparator.comparingInt(Conversation::getId));
+            modelMap.addAttribute("conversations", conversationService.getConversations());
+
         } catch (HttpServerErrorException exception) {
             JSONObject obj = new JSONObject(exception.getResponseBodyAsString());
             String errorMessage = obj.getString("message");
@@ -43,6 +44,6 @@ public class ConversationController {
             e.printStackTrace();
         }
 
-        return "homeLogged";
+        return "/conversations";
     }
 }

@@ -7,6 +7,7 @@ import com.studio_projektowe.communicator.security.ResourceType;
 import com.studio_projektowe.communicator.security.UnauthorizedException;
 import com.studio_projektowe.communicator.services.ConversationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,9 @@ public class ConversationController {
     @Autowired
     ConversationRepository conversationRepository;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     @PostMapping("")
     public void createConversation(@RequestBody  Conversation conversation,  HttpServletResponse res) {
         conversationRepository.save(conversation);
@@ -34,7 +38,8 @@ public class ConversationController {
 
     @RequestMapping(value = "/{ownerId}")
     public List<Conversation> getAllConversations(@PathVariable String ownerId, @RequestHeader("Authorization") String token) throws UnauthorizedException {
-        authorizationFilter.isAuthorizedTo(token, ownerId, ResourceType.USER);
-        return conversationService.getAllConversations(Integer.parseInt(ownerId));
+        String id = jdbcTemplate.queryForObject("SELECT id from app_user where username=" + "\'" + ownerId + "\'" + ";", String.class);
+        authorizationFilter.isAuthorizedTo(token, id, ResourceType.USER);
+        return conversationService.getAllConversations(Integer.parseInt(id), ownerId);
     }
 }
