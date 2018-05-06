@@ -55,16 +55,6 @@
     </div>
 </nav>
 
-<h3>Prywatny komunikator</h3>
-xxaaxadx
-<br>
-<div class="btn-group" role="group">
-    <button type="button" class="btn btn-secondary" name="conversationList" onclick="window.location.href='/conversations'">Zobacz listę konwersacji</button>
-    <button type="button" class="btn btn-secondary" name="addConversation" onclick="window.location.href='/addConversation'">Dodaj konwersację</button>
-</div>
-<c:if test="${pageContext.request.userPrincipal.name != null}">
-    <h4>Zalogowano jako: ${pageContext.request.userPrincipal.name}</h4>
-</c:if>
 <%--container--%>
 <div class="conversations-list">
     <c:if test="${param.error != null}">
@@ -72,27 +62,28 @@ xxaaxadx
             <p><c:out value="${param.error}"/></p>
         </div>
     </c:if>
-    <table class="table" border="1">
-        <thead class="thead-dark" align="center">
+    <table class="table table-hover table-dark" border="1">
+        <thead align="center" >
         <div>
-            <th>Id</th>
-            <th>Nazwa</th>
+            <th><h4>Nazwa</h4></th>
+            <th><h4>Użytkownicy</h4></th>
         </div>
 
         </thead>
         <tbody>
         <c:forEach var="conversation" items="${conversations}">
-            <tr>
-                <td align="center" style="width: 20%">${conversation.id}</td>
-                <td align="center">${conversation.name}</td>
+            <tr class='clickable-row' onclick="window.location.href='/conversations'">
+                <td align="center" style="width: 20%">${conversation.name}</td>
+                <td style="width: 159px">${conversation.userId}</td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
-
-
 </div>
 
+<div class="btn-group" role="group">
+    <button type="button" class="btn btn-secondary" name="addConversation" onclick="window.location.href='/addConversation'">Dodaj konwersację</button>
+</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
