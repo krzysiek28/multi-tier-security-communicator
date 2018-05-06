@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Sleeper;
 
 import static org.junit.Assert.assertEquals;
 
@@ -39,16 +40,16 @@ public class CreateAccountTest {
 
     @Test
     public void createAccount() throws InterruptedException {
-        WebElement button = driver.findElement(By.xpath(".//*[@id='mainWrapper']/div/div/div/form/div[3]/input"));
+        WebElement button = driver.findElement(By.xpath(".//*[@id='mainWrapper']/div/div/div/form/div[5]/input"));
 
         email.sendKeys("test@yahoo.com");
         user.sendKeys("test");
         login.sendKeys("test");
         pass.sendKeys("test");
         personalData.sendKeys("test");
-        button.click();
-
-        String logout = driver.findElement(By.xpath("//nav/div[@class='btn-group']/button")).getText();
+        button.submit();
+        Thread.sleep(100);
+        String logout = driver.findElement(By.xpath(".//nav/div[@class='btn-group']/button")).getText();
         assertEquals("Wyloguj się", logout);
     }
 

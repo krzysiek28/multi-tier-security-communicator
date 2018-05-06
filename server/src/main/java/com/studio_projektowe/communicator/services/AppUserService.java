@@ -44,8 +44,6 @@ public class AppUserService {
         if (!appUserRepository.exists(userId)) {
             throw new IllegalArgumentException("Uzytkownik nie istnieje!");
         }
-
         appUserRepository.delete(userId);
     }
-
 }

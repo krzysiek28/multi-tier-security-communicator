@@ -10,11 +10,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.Assert.assertEquals;
 
-public class LoginTest {
-
+public class DeleteAccountTest {
     private WebDriver driver;
-    private WebElement user;
-    private WebElement pass;
+    private final static String logIn = ".//*[@id='mainWrapper']/div/div/div/form/div[3]/input";
 
     @Before
     public void setUp() {
@@ -26,21 +24,25 @@ public class LoginTest {
         driver.manage().window().maximize();
         // Navigate to page
         driver.get("http://localhost:8211/loginPage");
-
-        user = driver.findElement(By.name("username"));
-        pass = driver.findElement(By.name("password"));
     }
 
     @Test
-    public void login() throws InterruptedException {
-        WebElement button = driver.findElement(By.xpath(".//*[@id='mainWrapper']/div/div/div/form/div[3]/input"));
-
-        user.sendKeys("test");
-        pass.sendKeys("test");
-        button.click();
-        Thread.sleep(200);
+    public void deleteUser() throws InterruptedException {
+        driver.findElement(By.name("username")).sendKeys("test");
+        driver.findElement(By.name("password")).sendKeys("test");
+        driver.findElement(By.xpath(logIn)).click();
+        Thread.sleep(100);
         String logout = driver.findElement(By.xpath("//nav/div[@class='btn-group']/button")).getText();
         assertEquals("Wyloguj się", logout);
+        driver.get("http://localhost:8211/delete/test");
+        driver.get("http://localhost:8211/loginPage");
+
+        driver.findElement(By.name("username")).sendKeys("test");
+        driver.findElement(By.name("password")).sendKeys("test");
+        driver.findElement(By.xpath(logIn)).click();
+        assertEquals("Wyloguj się", logout);
+        String communicate = driver.findElement(By.xpath(".//*[@id='mainWrapper']//form/div[@class='alert alert-danger']/p")).getText();
+        assertEquals("Niepoprawna nazwa użytkownika lub hasło", communicate);
     }
 
     @After

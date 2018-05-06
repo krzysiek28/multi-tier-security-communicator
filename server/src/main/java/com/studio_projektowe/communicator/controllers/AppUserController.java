@@ -2,9 +2,12 @@ package com.studio_projektowe.communicator.controllers;
 
 import com.studio_projektowe.communicator.entities.AppUser;
 import com.studio_projektowe.communicator.repositories.AppUserRepository;
+import com.studio_projektowe.communicator.security.ResourceType;
 import com.studio_projektowe.communicator.security.SecurityUtils;
 import com.studio_projektowe.communicator.services.AppUserService;
 import org.jsoup.Jsoup;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +27,9 @@ public class AppUserController {
     private final AppUserRepository appUserRepository;
     private final AppUserService appUserService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     /**
      *
@@ -92,10 +98,11 @@ public class AppUserController {
     /**
      * method delete user by id
      *
-     * @param userId
+     * @param userName
      */
-    @RequestMapping("/delete/{userId}")
-    public void deleteUser(@PathVariable String userId) {
+    @RequestMapping("/delete/{userName}")
+    public void deleteUser(@PathVariable String userName) {
+        String userId = jdbcTemplate.queryForObject("SELECT id from app_user where username=" + "\'" + userName + "\'" + ";", String.class);
         appUserService.deleteUser(Integer.parseInt(userId));
     }
 }

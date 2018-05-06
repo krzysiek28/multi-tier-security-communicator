@@ -59,7 +59,9 @@ public class AppUserService {
     }
 
     public void deleteUser() throws URISyntaxException, JSONException {
-        URI uri = new URI("http://localhost:8210/users/delete/"+userAuthenticationService.getUserId());
+        URI uri = new URI("http://localhost:8210/users/delete/"+userAuthenticationService.getUsername());
+        System.out.println(userAuthenticationService.getUserId());
+        System.out.println(uri);
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer "+userAuthenticationService.getRawToken());

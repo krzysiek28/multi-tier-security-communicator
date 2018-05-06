@@ -6,13 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
+import web.mvc.domain.Conversation;
 import web.mvc.service.AppUserService;
 import web.mvc.service.ConversationService;
 import web.mvc.service.MessageService;
@@ -21,6 +19,7 @@ import web.mvc.service.UserAuthenticationService;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 @Controller
 public class MyController {
@@ -133,5 +132,19 @@ public class MyController {
         }
 
         return "redirect:/homeLogged";
+    }
+
+    @RequestMapping(value = "/delete/{userName}")
+    public String deleteUser(@PathVariable("userName") String userName) throws URISyntaxException, JSONException {
+        try {
+            appUserService.deleteUser();
+        } catch (HttpServerErrorException exception) {
+            JSONObject obj = new JSONObject(exception.getResponseBodyAsString());
+            String errorMessage = obj.getString("message");
+            return "redirect:/homePage?error=" + errorMessage;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/";
     }
 }
