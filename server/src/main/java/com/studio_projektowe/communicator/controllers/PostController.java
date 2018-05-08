@@ -24,7 +24,6 @@ public class PostController {
     @MessageMapping("/newMessage")
     @SendTo("/topic/newMessage")
     public Post postMessage(Post post){
-        System.out.println("JESTEM TUTAJ");
         postService.addMessage(post);
         return post;
     }

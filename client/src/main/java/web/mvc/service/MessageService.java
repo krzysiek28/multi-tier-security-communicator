@@ -19,8 +19,6 @@ public class MessageService {
 
     public void postMessage(String conversationId, String message) throws JSONException, URISyntaxException {
 
-        System.out.println("IDZIE NEW MESSAGE");
-
         URI uri = new URI("http://localhost:8210/post/newMessage");
 
         String userId = userAuthenticationService.getUsername();
@@ -31,16 +29,12 @@ public class MessageService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("Authorization", "Bearer " + userAuthenticationService.getRawToken());
 
-        System.out.println("TOKEN TO "+userAuthenticationService.getRawToken());
-
         String requestJson = new JSONObject()
                 .put("conversationId", conversationId)
                 .put("userId", userId)
                 .put("body", message)
                 .put("date", new Date())
                 .toString();
-
-        System.out.println("SLE");
 
         HttpEntity<String> entity = new HttpEntity<String>(requestJson, headers);
         ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
