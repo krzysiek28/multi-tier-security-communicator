@@ -38,6 +38,7 @@ public class AppUserService {
     }
 
     public void register(String username, String email, String login, String password, String personalData) throws URISyntaxException, HttpClientErrorException, JSONException {
+
         URI uri = new URI("http://localhost:8210/users/sign-up");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -58,19 +59,6 @@ public class AppUserService {
         userAuthenticationService.setToken(key);
     }
 
-    public void deleteUser() throws URISyntaxException, JSONException {
-        URI uri = new URI("http://localhost:8210/users/delete/"+userAuthenticationService.getUsername());
-        System.out.println(userAuthenticationService.getUserId());
-        System.out.println(uri);
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer "+userAuthenticationService.getRawToken());
-        HttpEntity<String> entity = new HttpEntity<String>(headers);
-        ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
-        JSONObject obj = new JSONObject(response.getBody());
-
-    }
-
     public void setUserId() throws URISyntaxException, JSONException {
         URI uri = new URI("http://localhost:8210/users/"+userAuthenticationService.getUsername());
         RestTemplate restTemplate = new RestTemplate();
@@ -80,5 +68,7 @@ public class AppUserService {
         ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         JSONObject obj = new JSONObject(response.getBody());
         userAuthenticationService.setUserId(obj.getInt("id"));
+
     }
+
 }

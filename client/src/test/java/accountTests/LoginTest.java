@@ -38,7 +38,7 @@ public class LoginTest {
         user.sendKeys("test");
         pass.sendKeys("test");
         button.click();
-        Thread.sleep(200);
+
         String logout = driver.findElement(By.xpath("//nav/div[@class='btn-group']/button")).getText();
         assertEquals("Wyloguj się", logout);
     }

@@ -26,9 +26,13 @@
 </head>
 
 <body>
+<br>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
+    <a class="navbar-brand" href="/">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
 
@@ -41,10 +45,16 @@
     </div>
 </nav>
 
-<div class="container-fluid">
-    <img class="d-block w-100" src="static/images/logo_MTS.jpg">
 
+<h3>Prywatny komunikator</h3>
+<br>
+<div class="btn-group" role="group">
+    <button type="button" class="btn btn-secondary" name="conversationList" onclick="">Zobacz listę konwersacji</button>
+    <button type="button" class="btn btn-secondary" name="addConversation" onclick="window.location.href='/addConversation'">Dodaj konwersację</button>
 </div>
+
+
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

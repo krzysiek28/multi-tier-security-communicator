@@ -3,14 +3,20 @@ package web.mvc;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
-import web.mvc.domain.Conversation;
+import web.mvc.domain.Message;
 import web.mvc.service.AppUserService;
 import web.mvc.service.ConversationService;
 import web.mvc.service.MessageService;
@@ -19,7 +25,6 @@ import web.mvc.service.UserAuthenticationService;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
 
 @Controller
 public class MyController {
@@ -71,15 +76,32 @@ public class MyController {
     }
 
     @RequestMapping(value = "/homeLogged")
-    public String homeLogged(ModelMap model) throws URISyntaxException, JSONException, IOException {
+    public String homeLoged(ModelMap model) throws URISyntaxException, JSONException, IOException {
         model.addAttribute("authservice", userAuthenticationService);
         return "homeLogged";
     }
 
-    @RequestMapping(value = "/newMessage", method = RequestMethod.POST)
-    public String postMessage(@RequestParam String message) throws URISyntaxException, JSONException, IOException {
-        messageService.postMessage("abc", message);
+    @RequestMapping(value = "/addConversation")
+    public String addConversation(ModelMap model) throws URISyntaxException, JSONException, IOException {
+        model.addAttribute("authservice", userAuthenticationService);
+        return "addConversation";
+    }
+
+    @RequestMapping(value = "/conversation", method = RequestMethod.POST)
+    public String conversation(@RequestParam  String name, @RequestParam String password) throws URISyntaxException, JSONException, IOException {
+        conversationService.addConversation(name, password);
         return "conversation";
+    }
+
+    @MessageMapping("/newMessage")
+    @SendTo("/topic/public")
+    public Message postMessage(@Payload String content) throws URISyntaxException, JSONException, IOException {
+        String user = userAuthenticationService.getUsername();
+        Message message = new Message();
+        message.setUser(user);
+        message.setContent(content);
+        //messageService.postMessage("abc", message);
+        return message;
     }
 
     @RequestMapping(value = "/registrationPage")
@@ -132,19 +154,5 @@ public class MyController {
         }
 
         return "redirect:/homeLogged";
-    }
-
-    @RequestMapping(value = "/delete/{userName}")
-    public String deleteUser(@PathVariable("userName") String userName) throws URISyntaxException, JSONException {
-        try {
-            appUserService.deleteUser();
-        } catch (HttpServerErrorException exception) {
-            JSONObject obj = new JSONObject(exception.getResponseBodyAsString());
-            String errorMessage = obj.getString("message");
-            return "redirect:/homePage?error=" + errorMessage;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "redirect:/";
     }
 }

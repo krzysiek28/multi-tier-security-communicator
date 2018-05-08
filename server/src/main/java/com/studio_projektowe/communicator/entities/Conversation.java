@@ -47,6 +47,7 @@ public class Conversation {
     public Conversation() {
     }
 
+
     public Integer getId() {
         return id;
     }
@@ -70,6 +71,7 @@ public class Conversation {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
     public String getUserId() {
         return userId;
