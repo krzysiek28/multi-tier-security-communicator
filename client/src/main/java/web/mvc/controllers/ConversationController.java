@@ -34,7 +34,6 @@ public class ConversationController {
     public String conversationsList(HttpServletRequest request, ModelMap modelMap) throws JSONException, IOException, URISyntaxException {
         try {
             List<Conversation> conversations = conversationService.getConversations();
-//            Collections.sort(conversations, Comparator.comparingInt(Conversation::getId));
             modelMap.addAttribute("conversations", conversationService.getConversations());
 
         } catch (HttpServerErrorException exception) {
