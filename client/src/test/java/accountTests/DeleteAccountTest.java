@@ -1,8 +1,8 @@
 package accountTests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +14,7 @@ public class DeleteAccountTest {
     private WebDriver driver;
     private final static String logIn = ".//*[@id='mainWrapper']/div/div/div/form/div[3]/input";
 
-    @Before
+    @BeforeTest
     public void setUp() {
         System.setProperty("webdriver.chrome.driver",
                 "./src/test/resources/drivers/chromedriver.exe");
@@ -45,7 +45,7 @@ public class DeleteAccountTest {
         assertEquals("Niepoprawna nazwa użytkownika lub hasło", communicate);
     }
 
-    @After
+    @AfterTest
     public void tearDown() throws Exception {
         // Close the browser
         driver.quit();

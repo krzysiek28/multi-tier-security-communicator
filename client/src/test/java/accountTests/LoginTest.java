@@ -1,8 +1,8 @@
 package accountTests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,7 +16,7 @@ public class LoginTest {
     private WebElement user;
     private WebElement pass;
 
-    @Before
+    @BeforeTest
     public void setUp() {
         System.setProperty("webdriver.chrome.driver",
                 "./src/test/resources/drivers/chromedriver.exe");
@@ -35,15 +35,14 @@ public class LoginTest {
     public void login() throws InterruptedException {
         WebElement button = driver.findElement(By.xpath(".//*[@id='mainWrapper']/div/div/div/form/div[3]/input"));
 
-        user.sendKeys("test");
-        pass.sendKeys("test");
+        user.sendKeys("test2");
+        pass.sendKeys("test2");
         button.click();
-        Thread.sleep(200);
         String logout = driver.findElement(By.xpath("//nav/div[@class='btn-group']/button")).getText();
         assertEquals("Wyloguj się", logout);
     }
 
-    @After
+    @AfterTest
     public void tearDown() throws Exception {
         // Close the browser
         driver.quit();

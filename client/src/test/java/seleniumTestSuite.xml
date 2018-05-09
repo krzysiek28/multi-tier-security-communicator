@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name = "SeleniumTestSuite">
+<suite name = "SeleniumTestSuite2">
     <test name = "Selenium tests">
         <classes>
-            <class name = "accountTests.DeleteAccountTest"/>
-            <class name = "accountTests.CreateAccountTest"/>
             <class name = "accountTests.LoginTest"/>
+            <class name = "accountTests.CreateAccountTest"/>
+            <class name = "accountTests.DeleteAccountTest"/>
         </classes>
     </test>
 </suite>
