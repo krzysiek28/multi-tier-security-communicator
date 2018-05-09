@@ -19,7 +19,7 @@ public class LoginTest {
     @BeforeTest
     public void setUp() {
         System.setProperty("webdriver.chrome.driver",
-                "./src/test/resources/drivers/chromedriver.exe");
+                "client/src/test/resources/drivers/chromedriver.exe");
         // Launch Chrome
         driver = new ChromeDriver();
         // Maximize the browser window
