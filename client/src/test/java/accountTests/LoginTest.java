@@ -19,7 +19,7 @@ public class LoginTest {
     @BeforeTest
     public void setUp() {
         System.setProperty("webdriver.chrome.driver",
-                "client/src/test/resources/drivers/chromedriver.exe");
+                "./src/test/resources/drivers/chromedriver.exe");
         // Launch Chrome
         driver = new ChromeDriver();
         // Maximize the browser window
@@ -35,8 +35,8 @@ public class LoginTest {
     public void login() throws InterruptedException {
         WebElement button = driver.findElement(By.xpath(".//*[@id='mainWrapper']/div/div/div/form/div[3]/input"));
 
-        user.sendKeys("test2");
-        pass.sendKeys("test2");
+        user.sendKeys("test");
+        pass.sendKeys("test");
         button.click();
         String logout = driver.findElement(By.xpath("//nav/div[@class='btn-group']/button")).getText();
         assertEquals("Wyloguj się", logout);

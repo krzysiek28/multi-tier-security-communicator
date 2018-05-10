@@ -17,7 +17,7 @@ public class DeleteAccountTest {
     @BeforeTest
     public void setUp() {
         System.setProperty("webdriver.chrome.driver",
-                "client/src/test/resources/drivers/chromedriver.exe");
+                "./src/test/resources/drivers/chromedriver.exe");
         // Launch Chrome
         driver = new ChromeDriver();
         // Maximize the browser window

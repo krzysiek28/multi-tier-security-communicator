@@ -25,7 +25,7 @@ public class CreateAccountTest {
     @BeforeTest
     public void setUp() {
         System.setProperty("webdriver.chrome.driver",
-                "client/src/test/resources/drivers/chromedriver.exe");
+                "./src/test/resources/drivers/chromedriver.exe");
         // Launch Chrome
         driver = new ChromeDriver();
         // Maximize the browser window
@@ -44,11 +44,11 @@ public class CreateAccountTest {
     public void createAccount() throws InterruptedException {
         WebElement button = driver.findElement(By.xpath(".//*[@id='mainWrapper']/div/div/div/form/div[5]/input"));
 
-        email.sendKeys("test3@yahoo.com");
-        user.sendKeys("test3");
-        login.sendKeys("test3");
-        pass.sendKeys("test3");
-        personalData.sendKeys("test3");
+        email.sendKeys("test@yahoo.com");
+        user.sendKeys("test");
+        login.sendKeys("test");
+        pass.sendKeys("test");
+        personalData.sendKeys("test");
         button.submit();
         Thread.sleep(100);
         String logout = driver.findElement(By.xpath(".//nav/div[@class='btn-group']/button")).getText();

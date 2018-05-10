@@ -4,9 +4,9 @@
 <suite name = "SeleniumTestSuite2">
     <test name = "Selenium tests">
         <classes>
-            <class name = "accountTests.LoginTest"/>
-            <class name = "accountTests.CreateAccountTest"/>
             <class name = "accountTests.DeleteAccountTest"/>
+            <class name = "accountTests.CreateAccountTest"/>
+            <class name = "accountTests.LoginTest"/>
         </classes>
     </test>
 </suite>
