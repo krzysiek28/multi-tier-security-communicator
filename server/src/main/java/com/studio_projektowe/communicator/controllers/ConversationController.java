@@ -42,4 +42,9 @@ public class ConversationController {
         authorizationFilter.isAuthorizedTo(token, id, ResourceType.USER);
         return conversationService.getAllConversations(Integer.parseInt(id), ownerId);
     }
+
+    @RequestMapping(value = "/messages/{id}")
+    public Conversation getConversation(@PathVariable String name) throws UnauthorizedException {
+        return conversationService.getConversation(name);
+    }
 }

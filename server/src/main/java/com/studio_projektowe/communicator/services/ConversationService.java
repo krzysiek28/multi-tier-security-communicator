@@ -31,4 +31,8 @@ public class ConversationService {
                 .forEach(allConversations::add);
         return allConversations;
     }
+
+    public Conversation getConversation(String name){
+        return conversationRepository.findConversationByName(name);
+    }
 }

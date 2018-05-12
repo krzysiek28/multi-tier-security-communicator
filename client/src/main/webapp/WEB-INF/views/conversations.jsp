@@ -40,14 +40,6 @@
 
         </ul>
     </div>
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <h4>Zalogowano jako: ${pageContext.request.userPrincipal.name}</h4>
-    </c:if>
-    <div class="nick" style="padding-right: 10px; color: white">
-        <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <h4>Zalogowano jako: ${pageContext.request.userPrincipal.name}</h4>
-        </c:if>
-    </div>
 
     <!-- naval with buttons -->
     <div class="btn-group" role="group" aria-label="Basic example">
@@ -81,10 +73,42 @@
     </table>
 </div>
 
-<div class="btn-group" role="group">
-    <button type="button" class="btn btn-secondary" name="addConversation" onclick="window.location.href='/addConversation'">Dodaj konwersację</button>
-</div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-secondary" name="addConversation" data-toggle="modal" data-target="#addModal">Dodaj konwersację</button>
 
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Dodawanie konwersacji</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="mainWrapper">
+                    <div class="form">
+                        <form action="/conversation" method="post">
+                            <div class="input-group input-sm">
+                                <label class="input-group-addon">Podaj nazwę konwersacji:</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="name" required>
+                            </div>
+                            <div class="input-group input-sm">
+                                <label class="input-group-addon">Podaj hasło do konwersacji:</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Hasło" />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                                <button class="btn btn-secondary" type="submit"> Stwórz </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

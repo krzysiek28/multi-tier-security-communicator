@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,9 +34,7 @@ public class ConversationController {
     @RequestMapping(value = "/conversations")
     public String conversationsList(HttpServletRequest request, ModelMap modelMap) throws JSONException, IOException, URISyntaxException {
         try {
-            List<Conversation> conversations = conversationService.getConversations();
             modelMap.addAttribute("conversations", conversationService.getConversations());
-
         } catch (HttpServerErrorException exception) {
             JSONObject obj = new JSONObject(exception.getResponseBodyAsString());
             String errorMessage = obj.getString("message");
@@ -56,6 +55,12 @@ public class ConversationController {
     @RequestMapping(value = "/conversation", method = RequestMethod.POST)
     public String conversation(@RequestParam String name, @RequestParam String password) throws URISyntaxException, JSONException, IOException {
         conversationService.addConversation(name, password);
+        return "conversation";
+    }
+
+    @RequestMapping(value = "/conversation/messages/{id}")
+    public String getConversation(@PathVariable("id") String id) throws URISyntaxException, JSONException, IOException {
+        conversationService.getConversation(id);
         return "conversation";
     }
 }
