@@ -27,7 +27,7 @@ public class ConversationController {
     private JdbcTemplate jdbcTemplate;
 
     @PostMapping("")
-    public void createConversation(@RequestBody  Conversation conversation,  HttpServletResponse res) {
+    public void createConversation(@RequestBody Conversation conversation,  HttpServletResponse res) {
         conversationRepository.save(conversation);
     }
 

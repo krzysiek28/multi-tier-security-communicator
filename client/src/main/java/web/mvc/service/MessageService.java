@@ -18,17 +18,12 @@ public class MessageService {
     UserAuthenticationService userAuthenticationService;
 
     public void postMessage(String conversationId, String message) throws JSONException, URISyntaxException {
-
         URI uri = new URI("http://localhost:8210/post/newMessage");
-
         String userId = userAuthenticationService.getUsername();
-
         RestTemplate restTemplate = new RestTemplate();
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("Authorization", "Bearer " + userAuthenticationService.getRawToken());
-
         String requestJson = new JSONObject()
                 .put("conversationId", conversationId)
                 .put("userId", userId)
@@ -38,8 +33,6 @@ public class MessageService {
 
         HttpEntity<String> entity = new HttpEntity<String>(requestJson, headers);
         ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
-
-
     }
 
 }
