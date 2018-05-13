@@ -4,7 +4,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpServerErrorException;
 import web.mvc.domain.Post;
@@ -26,8 +28,8 @@ public class PostController {
         this.postService = postService;
     }
 
-    @RequestMapping(value = "/posts")
-    public String postsList(@RequestParam("conversationId") String conversationId,
+    @RequestMapping(value = "/conversation/messages/{conversationId}/posts")
+    public String postsList(@PathVariable("conversationId") String conversationId,
                             HttpServletRequest request,
                             ModelMap modelMap) throws JSONException, IOException, URISyntaxException {
         try {
@@ -43,12 +45,14 @@ public class PostController {
         return "/conversation";
     }
 
-    @RequestMapping(value = "/addPost")
-    public String addConversation(@RequestParam String conversationId,
-                                  @RequestParam String message,
-                                  ModelMap model) throws URISyntaxException, JSONException, IOException {
+    @RequestMapping(value = "/conversation/messages/{conversationId}/addPost", method = RequestMethod.POST)
+    public String addPost(@PathVariable String conversationId,
+                          @RequestParam String message,
+                          ModelMap model) throws URISyntaxException, JSONException, IOException {
         model.addAttribute("authservice", userAuthenticationService);
+        System.out.println("1");
         postService.addPost(conversationId, message);
+        System.out.println("2");
         return "conversation";
     }
 }

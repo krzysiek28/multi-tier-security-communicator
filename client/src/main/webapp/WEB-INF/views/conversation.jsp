@@ -12,26 +12,17 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Cache-Control" content="no-cache">
-    <meta http-equiv="Expires" content="Sat, 01 Dec 2001 00:00:00 GMT">
-    <title><c:out value="${param.title}"/></title>
+    <title>Message</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-    <script src="static/js/chat.js"></script>
 </head>
 
 <body>
-<br>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/homeLogged">Home</a>
@@ -45,20 +36,31 @@
     </div>
 </nav>
 
-<h3>Napisz coś!</h3>
-<form id="conversationForm" name="conversationForm" onsubmit="sendMessage(event)">
-    <div class="text-center">
-    <textarea rows="20" cols="100" id="conversation" readonly>
+<table class="table table-hover table-dark" border="1">
+    <thead align="center" >
+    <div>
+        <th><h4>Nazwa</h4></th>
+        <th><h4>Użytkownicy</h4></th>
+    </div>
 
-    </textarea>
-    <div class="input-group input-sm text-input col-md-8 center-block">
-        <input type="text" class="form-control" id="message" name="message" />
+    </thead>
+    <tbody>
+    <c:forEach var="post" items="${posts}">
+        <tr>
+            <td align="center" style="width: 20%">${post.text}</td>
+            <td style="width: 159px">$${post.body}</td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+
+<form action="${requestScope['javax.servlet.forward.request_uri']}/addPost" method="post">
+    <div class="form-group">
+        <label for="message">Wiadomość:</label>
+        <input type="text" class="form-control" id="message" name="message" placeholder="message">
     </div>
-    <br>
-    <button class="btn btn-secondary" type="submit"> Wyślij </button>
-    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-
 
 
 <!-- Optional JavaScript -->
