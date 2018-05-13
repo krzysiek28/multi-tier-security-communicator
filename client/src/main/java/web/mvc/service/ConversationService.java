@@ -32,8 +32,6 @@ public class ConversationService {
 
     public void addConversation(String name, String password) throws JSONException, URISyntaxException {
         String userId = userAuthenticationService.getUsername();
-        System.out.println("IDZIE DODANIE KONWERSACJI O NAZWIE "+name+" Z HASŁEM "+password+" ZALOZONEJ PRZEZ "+userId);
-
         URI uri = new URI("http://localhost:8210/conversation");
 
         RestTemplate restTemplate = new RestTemplate();
@@ -68,15 +66,14 @@ public class ConversationService {
 
     public Conversation getConversation(String name) throws URISyntaxException, IOException, HttpClientErrorException {
         String username = userAuthenticationService.getUsername();
-        URI uri = new URI("http://localhost:8210/conversation/massages/" + username + "/" + name);
+        URI uri = new URI("http://localhost:8210/conversation/messages/" + name);
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + userAuthenticationService.getRawToken());
         HttpEntity<String> entity = new HttpEntity<>(headers);
-
         ResponseEntity<String> data = restTemplateHCCHRF.exchange(uri, HttpMethod.GET, entity, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return objectMapper.readValue(data.getBody(),
-                objectMapper.getTypeFactory().constructCollectionType(List.class, Conversation.class));
+                objectMapper.getTypeFactory().constructType(Conversation.class));
     }
 }

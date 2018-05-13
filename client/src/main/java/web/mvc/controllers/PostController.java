@@ -31,7 +31,7 @@ public class PostController {
                             HttpServletRequest request,
                             ModelMap modelMap) throws JSONException, IOException, URISyntaxException {
         try {
-            modelMap.addAttribute("conversations", postService.getPosts(conversationId));
+            modelMap.addAttribute("posts", postService.getPosts(conversationId));
         } catch (HttpServerErrorException exception) {
             JSONObject obj = new JSONObject(exception.getResponseBodyAsString());
             String errorMessage = obj.getString("message");

@@ -43,7 +43,7 @@ public class ConversationController {
         return conversationService.getAllConversations(Integer.parseInt(id), ownerId);
     }
 
-    @RequestMapping(value = "/messages/{id}")
+    @RequestMapping(value = "/messages/{name}")
     public Conversation getConversation(@PathVariable String name) throws UnauthorizedException {
         return conversationService.getConversation(name);
     }
