@@ -36,19 +36,22 @@
     </div>
 </nav>
 
+<button type="button" class="btn btn-secondary" name="conversationList" onclick="window.location.href='${requestScope['javax.servlet.forward.request_uri']}/posts'">/posts</button>
+
+
 <table class="table table-hover table-dark" border="1">
     <thead align="center" >
     <div>
-        <th><h4>Nazwa</h4></th>
-        <th><h4>Użytkownicy</h4></th>
+        <th><h4>Użytkownik</h4></th>
+        <th><h4>Tekst</h4></th>
     </div>
 
     </thead>
     <tbody>
     <c:forEach var="post" items="${posts}">
         <tr>
-            <td align="center" style="width: 20%">${post.text}</td>
-            <td style="width: 159px">$${post.body}</td>
+            <td align="center" style="width: 20%">${post.userId}</td>
+            <td style="width: 159px">zgadnij co mam w środku</td>
         </tr>
     </c:forEach>
     </tbody>

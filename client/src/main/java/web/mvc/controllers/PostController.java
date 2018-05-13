@@ -45,14 +45,12 @@ public class PostController {
         return "/conversation";
     }
 
-    @RequestMapping(value = "/conversation/messages/{conversationId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/conversation/messages/{conversationId}/posts", method = RequestMethod.POST)
     public String addPost(@PathVariable String conversationId,
                           @RequestParam String message,
                           ModelMap model) throws URISyntaxException, JSONException, IOException {
         model.addAttribute("authservice", userAuthenticationService);
-        System.out.println("1");
         postService.addPost(conversationId, message);
-        System.out.println("2");
-        return "conversation";
+        return "/conversation";
     }
 }
