@@ -14,17 +14,15 @@ public class Post {
     String conversationId;
     String userId;
     String body;
-    Date date;
 
 
     public Post() {
     }
 
-    public Post(String conversationId, String userId, String postBody, Date postDate){
+    public Post(String conversationId, String userId, String postBody){
         this.conversationId = conversationId;
         this.userId = userId;
         this.body = postBody;
-        this.date = postDate;
     }
 
     public Integer getId() {
@@ -59,21 +57,12 @@ public class Post {
         this.body = body;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     @Override
     public String toString() {
         return "{" +
                 "\"id\":\"" + id + '\"' +
                 ",\"body\":\"" + body + '\"' +
                 ",\"userId\":\"" + userId + '\"' +
-                ",\"date\":\"" + date + "\"" +
                 '}';
     }
 }

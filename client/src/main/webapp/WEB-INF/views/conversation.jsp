@@ -54,7 +54,7 @@
     </tbody>
 </table>
 
-<form action="${requestScope['javax.servlet.forward.request_uri']}/addPost" method="post">
+<form action="${requestScope['javax.servlet.forward.request_uri']}" method="post">
     <div class="form-group">
         <label for="message">Wiadomość:</label>
         <input type="text" class="form-control" id="message" name="message" placeholder="message">

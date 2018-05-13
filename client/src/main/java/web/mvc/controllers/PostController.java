@@ -45,7 +45,7 @@ public class PostController {
         return "/conversation";
     }
 
-    @RequestMapping(value = "/conversation/messages/{conversationId}/addPost", method = RequestMethod.POST)
+    @RequestMapping(value = "/conversation/messages/{conversationId}", method = RequestMethod.POST)
     public String addPost(@PathVariable String conversationId,
                           @RequestParam String message,
                           ModelMap model) throws URISyntaxException, JSONException, IOException {
