@@ -24,6 +24,9 @@
 
 <body>
 
+<%--Set refresh, autoload time as 5 seconds--%>
+<% response.setIntHeader("Refresh", 5); %>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/homeLogged">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,13 +39,10 @@
     </div>
 </nav>
 
-<button type="button" class="btn btn-secondary" name="conversationList" onclick="window.location.href='${requestScope['javax.servlet.forward.request_uri']}/posts'">/posts</button>
-
-
 <table class="table table-hover table-dark" border="1">
     <thead align="center" >
     <div>
-        <th><h4>Użytkownik</h4></th>
+        <th style="width: 5%"><h4>Użytkownik</h4></th>
         <th><h4>Tekst</h4></th>
     </div>
 
@@ -50,19 +50,18 @@
     <tbody>
     <c:forEach var="post" items="${posts}">
         <tr>
-            <td align="center" style="width: 20%">${post.userId}</td>
-            <td style="width: 159px">zgadnij co mam w środku</td>
+            <td align="center">${post.userId}</td>
+            <td>${post.body}</td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
 
 <form action="${requestScope['javax.servlet.forward.request_uri']}" method="post">
-    <div class="form-group">
-        <label for="message">Wiadomość:</label>
-        <input type="text" class="form-control" id="message" name="message" placeholder="message">
+    <div class="btn-group" style="width: 100%">
+        <input type="textarea" class="form-control" id="message" name="message" placeholder="message" style="width: 100%">
+        <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 

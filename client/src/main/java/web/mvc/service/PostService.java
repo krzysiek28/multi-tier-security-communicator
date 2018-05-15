@@ -37,7 +37,7 @@ public class PostService {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return objectMapper.readValue(data.getBody(),
-                objectMapper.getTypeFactory().constructCollectionType(List.class, Conversation.class));
+                objectMapper.getTypeFactory().constructCollectionType(List.class, Post.class));
     }
 
     public void addPost(String conversationId, String body) throws JSONException, URISyntaxException {

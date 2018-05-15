@@ -8,7 +8,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ConversationService {
@@ -24,12 +26,12 @@ public class ConversationService {
     }
 
     public List<Conversation> getAllConversations(Integer ownerId, String ownerName) {
-        if (!appUserRepository.exists(ownerId))
+/*        if (!appUserRepository.exists(ownerId))
             throw new IllegalArgumentException("Niepoprawne id użytkownika!");
         List<Conversation> allConversations = new ArrayList<>();
         conversationRepository.findConversationsByUserId(ownerName)
-                .forEach(allConversations::add);
-        return allConversations;
+                .forEach(allConversations::add);*/
+        return conversationRepository.findAll().stream().collect(Collectors.toList());
     }
 
     public Conversation getConversation(String name){

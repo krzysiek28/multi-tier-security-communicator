@@ -69,6 +69,7 @@
 <br>
 
 <%--action buttons--%>
+<div class="buttonComplex" style="">
 <div class="btn-group" role="group">
     <button type="button" class="btn btn-secondary" name="conversationList" onclick="window.location.href='/conversations'">Zobacz listę konwersacji</button>
 
@@ -133,7 +134,7 @@
         </div>
     </div>
 </div>
-
+</div>
 <%--end of action buttons--%>
 
 <%--container--%>

@@ -55,7 +55,7 @@ public class ConversationController {
     @RequestMapping(value = "/conversation", method = RequestMethod.POST)
     public String conversation(@RequestParam String name, @RequestParam String password) throws URISyntaxException, JSONException, IOException {
         conversationService.addConversation(name, password);
-        return "conversation";
+        return "redirect:/conversations";
     }
 
     @RequestMapping(value = "/conversation/messages/{name}")

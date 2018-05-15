@@ -51,6 +51,6 @@ public class PostController {
                           ModelMap model) throws URISyntaxException, JSONException, IOException {
         model.addAttribute("authservice", userAuthenticationService);
         postService.addPost(conversationId, message);
-        return "/conversation";
+        return "redirect:/conversation/messages/{conversationId}/posts";
     }
 }

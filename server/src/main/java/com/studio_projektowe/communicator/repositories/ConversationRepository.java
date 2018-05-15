@@ -9,4 +9,5 @@ import java.util.List;
 public interface ConversationRepository extends JpaRepository<Conversation, Integer> {
     List<Conversation> findConversationsByUserId(String ownerId);
     Conversation findConversationByName(String name);
+    List<Conversation> findAll();
 }
