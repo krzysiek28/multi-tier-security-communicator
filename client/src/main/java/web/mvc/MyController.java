@@ -80,12 +80,9 @@ public class MyController {
 
     @MessageMapping("/newMessage")
     @SendTo("/topic/public")
-    public Message postMessage(@Payload String content) throws URISyntaxException, JSONException, IOException {
-        String user = userAuthenticationService.getUsername();
-        Message message = new Message();
-        message.setUser(user);
-        message.setContent(content);
-        //messageService.postMessage("abc", message);
+    public Message postMessage(@Payload Message message) throws URISyntaxException, JSONException, IOException {
+        //messageService.postMessage("hau", message);
+        System.out.println("DOSTAJE TAKI PAYLOAD "+message.getUser()+" "+message.getContent());
         return message;
     }
 

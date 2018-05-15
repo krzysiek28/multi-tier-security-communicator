@@ -19,7 +19,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="/static/js/chat.js"></script>
 </head>
 
 <body>
@@ -36,10 +38,14 @@
     </div>
 </nav>
 
+<label id="conversationName"><h2>${conversation}</h2></label>
+
+<br/>
+
 <button type="button" class="btn btn-secondary" name="conversationList" onclick="window.location.href='${requestScope['javax.servlet.forward.request_uri']}/posts'">/posts</button>
 
 
-<table class="table table-hover table-dark" border="1">
+<table  id="wholeTable" class="table table-hover table-dark" border="1">
     <thead align="center" >
     <div>
         <th><h4>Użytkownik</h4></th>
@@ -47,7 +53,7 @@
     </div>
 
     </thead>
-    <tbody>
+    <tbody id="conversation">
     <c:forEach var="post" items="${posts}">
         <tr>
             <td align="center" style="width: 20%">${post.userId}</td>
@@ -57,7 +63,7 @@
     </tbody>
 </table>
 
-<form action="${requestScope['javax.servlet.forward.request_uri']}" method="post">
+<form id="conversationForm" name="conversationForm" onsubmit="sendMessage('${username}','${conversation}', event)">
     <div class="form-group">
         <label for="message">Wiadomość:</label>
         <input type="text" class="form-control" id="message" name="message" placeholder="message">

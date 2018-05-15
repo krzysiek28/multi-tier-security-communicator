@@ -23,12 +23,8 @@ public class ConversationService {
         this.appUserRepository = appUserRepository;
     }
 
-    public List<Conversation> getAllConversations(Integer ownerId, String ownerName) {
-        if (!appUserRepository.exists(ownerId))
-            throw new IllegalArgumentException("Niepoprawne id użytkownika!");
-        List<Conversation> allConversations = new ArrayList<>();
-        conversationRepository.findConversationsByUserId(ownerName)
-                .forEach(allConversations::add);
+    public List<Conversation> getAllConversations() {
+        List<Conversation> allConversations = conversationRepository.findAll();
         return allConversations;
     }
 

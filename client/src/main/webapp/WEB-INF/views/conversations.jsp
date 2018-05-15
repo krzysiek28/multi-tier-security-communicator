@@ -72,7 +72,7 @@
         </thead>
         <tbody>
         <c:forEach var="conversation" items="${conversations}">
-            <tr class='clickable-row' onclick="window.location.href='/conversation/messages/${conversation.name}'">
+            <tr class='clickable-row' onclick="window.location.href='/conversation/${conversation.name}'">
                 <td align="center" style="width: 20%">${conversation.name}</td>
                 <td style="width: 159px">${conversation.userId}</td>
             </tr>

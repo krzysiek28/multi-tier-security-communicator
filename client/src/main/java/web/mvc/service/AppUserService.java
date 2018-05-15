@@ -3,6 +3,8 @@ package web.mvc.service;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 @Service
+@Scope(scopeName = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class AppUserService {
     @Autowired
     UserAuthenticationService userAuthenticationService;

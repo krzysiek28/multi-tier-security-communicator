@@ -26,16 +26,23 @@ function onError(error) {
 }
 
 
-function sendMessage(event) {
+function sendMessage(user, conversation, event) {
+
 
     var messageInput = document.querySelector('#message')
-    var messageContent = messageInput.value.trim()
+    var content = messageInput.value.trim()
 
-     stompClient.send("/newMessage", {}, messageContent);
+    var message = {user: user, content: content, conversation: conversation}
+
+    console.log("message content to "+ JSON.stringify(message))
+    console.log("message class to "+message.type)
+
+     stompClient.send("/newMessage", {}, JSON.stringify(message));
      messageInput.value = '';
 
-    event.preventDefault();
-    return false;
+     event.preventDefault();
+
+     return false;
 }
 
 
@@ -43,9 +50,26 @@ function onMessageReceived(payload) {
 
     var message = JSON.parse(payload.body);
 
+    var conversationName = document.getElementById("conversationName").textContent.trim();
+
+    if(message.conversation != conversationName){
+        return;
+    }
+
+    var conversation = document.getElementById("conversation");
+    var row = conversation.insertRow(0);
+
+    var userCell = row.insertCell(0);
+    var messageCell = row.insertCell(1);
+
+    userCell.innerHTML = message.user;
+    messageCell.innerHTML = message.content;
+
+    console.log("conversation to "+conversation)
+    console.log("conversation to "+conversation.innerHTML)
 
 
-    document.querySelector('#conversation').value = document.querySelector('#conversation').value+message.user +":" + message.content +'\n'
+
 }
 
 connect()

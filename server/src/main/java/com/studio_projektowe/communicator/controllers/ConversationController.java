@@ -40,7 +40,7 @@ public class ConversationController {
     public List<Conversation> getAllConversations(@PathVariable String ownerId, @RequestHeader("Authorization") String token) throws UnauthorizedException {
         String id = jdbcTemplate.queryForObject("SELECT id from app_user where username=" + "\'" + ownerId + "\'" + ";", String.class);
         authorizationFilter.isAuthorizedTo(token, id, ResourceType.USER);
-        return conversationService.getAllConversations(Integer.parseInt(id), ownerId);
+        return conversationService.getAllConversations();
     }
 
     @RequestMapping(value = "/messages/{name}")

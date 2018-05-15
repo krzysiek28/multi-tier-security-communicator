@@ -58,8 +58,10 @@ public class ConversationController {
         return "conversation";
     }
 
-    @RequestMapping(value = "/conversation/messages/{name}")
-    public String getConversation(@PathVariable("name") String name) throws URISyntaxException, JSONException, IOException {
+    @RequestMapping(value = "/conversation/{name}")
+    public String getConversation(@PathVariable("name") String name, ModelMap modelMap) throws URISyntaxException, JSONException, IOException {
+        modelMap.addAttribute("username",userAuthenticationService.getUsername());
+        modelMap.addAttribute("conversation", name);
         conversationService.getConversation(name);
         return "conversation";
     }

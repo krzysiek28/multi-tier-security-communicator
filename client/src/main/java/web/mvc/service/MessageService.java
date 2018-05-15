@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import web.mvc.domain.Message;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -17,7 +18,7 @@ public class MessageService {
     @Autowired
     UserAuthenticationService userAuthenticationService;
 
-    public void postMessage(String conversationId, String message) throws JSONException, URISyntaxException {
+    public void postMessage(String conversationId, Message message) throws JSONException, URISyntaxException {
         URI uri = new URI("http://localhost:8210/post/newMessage");
         String userId = userAuthenticationService.getUsername();
         RestTemplate restTemplate = new RestTemplate();

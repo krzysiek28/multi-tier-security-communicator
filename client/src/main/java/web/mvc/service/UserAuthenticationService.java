@@ -1,17 +1,21 @@
 package web.mvc.service;
 
 import io.jsonwebtoken.*;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
 
 @Service
+@Scope(scopeName = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserAuthenticationService {
     private String rawToken = null;
     private String username;
     private Integer userId;
 
     public void setToken(String token) {
+        System.out.println("IDZE SET TOKEN");
         this.rawToken = token.replaceFirst("Bearer ", "");
 
         final String[] user = new String[1];
@@ -34,6 +38,7 @@ public class UserAuthenticationService {
     }
 
     public String getUsername() {
+        System.out.println("IDZIE GET USERNAME Z NEJMEM "+username);
         return this.username;
     }
 
