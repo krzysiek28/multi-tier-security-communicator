@@ -42,7 +42,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/homeLogged">Home</a>
+    <a class="navbar-brand" href="/conversations">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -70,87 +70,48 @@
 
 <%--action buttons--%>
 <div class="buttonComplex" style="">
-<div class="btn-group" role="group">
-    <button type="button" class="btn btn-secondary" name="conversationList" onclick="window.location.href='/conversations'">Zobacz listę konwersacji</button>
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-secondary" name="conversationList" onclick="window.location.href='/conversations'">Zobacz listę konwersacji</button>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-secondary" name="addConversation" data-toggle="modal" data-target="#addModal">Dodaj konwersację</button>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-secondary" name="addConversation" data-toggle="modal" data-target="#addModal">Dodaj konwersację</button>
 
-    <!-- Modal -->
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Dodawanie konwersacji</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div id="mainWrapper">
-                        <div class="form">
-                            <form action="/conversation" method="post">
-                                <div class="input-group input-sm">
-                                    <label class="input-group-addon">Podaj nazwę konwersacji:</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="name" required>
-                                </div>
-                                <div class="input-group input-sm">
-                                    <label class="input-group-addon">Podaj hasło do konwersacji:</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Hasło" />
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
-                                    <button class="btn btn-secondary" type="submit"> Stwórz </button>
-                                </div>
-                            </form>
+        <!-- Modal -->
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addModalLabel">Dodawanie konwersacji</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="mainWrapper">
+                            <div class="form">
+                                <form action="/conversation" method="post">
+                                    <div class="input-group input-sm">
+                                        <label class="input-group-addon">Podaj nazwę konwersacji:</label>
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="name" required>
+                                    </div>
+                                    <div class="input-group input-sm">
+                                        <label class="input-group-addon">Podaj hasło do konwersacji:</label>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Hasło" />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                                        <button class="btn btn-secondary" type="submit"> Stwórz </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#JoinModal">Dołącz do konwersacji</button>
 
-    <!-- Modal -->
-    <div class="modal fade" id="JoinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="joinModalLabel">Dołączanie do konwersacji</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div id="Wrapper">
-                        <div class="form">
-                            <form action="/conversation/messages/${nazwa}" method="post">
-                                <div class="input-group input-sm">
-                                    <label class="input-group-addon">Podaj nazwę konwersacji:</label>
-                                    <input type="text" class="form-control" id="nazwa" name="nazwa" placeholder="nazwa" required>
-                                </div>
-                                <div class="input-group input-sm">
-                                    <label class="input-group-addon">Podaj hasło do konwersacji:</label>
-                                    <input type="password" class="form-control" id="haslo" name="haslo" placeholder="haslo" />
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
-                                    <button class="btn btn-secondary" type="submit"> Stwórz </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
-                    <button type="button" class="btn btn-primary" name="joinToConversation" onclick="window.location.href='/conversation/messages/${nazwa}'">Dołącz</button>
-                </div>
-            </div>
-        </div>
     </div>
-</div>
 </div>
 <%--end of action buttons--%>
 

@@ -56,7 +56,7 @@ public class MyController {
             return "redirect:/loginPage?error=badcredentials&message=" + errorMessage;
 
         }
-        return "redirect:/homeLogged";
+        return "redirect:/conversations";
     }
 
     @RequestMapping("/logout")
@@ -75,7 +75,7 @@ public class MyController {
     @RequestMapping(value = "/homeLogged")
     public String homeLogged(ModelMap model) throws URISyntaxException, JSONException, IOException {
         model.addAttribute("authservice", userAuthenticationService);
-        return "homeLogged";
+        return "/conversations";
     }
 
     @MessageMapping("/newMessage")
@@ -100,11 +100,11 @@ public class MyController {
         try {
             obj = new JSONObject(ex.getResponseBodyAsString());
             String errorMessage = obj.getString("message");
-            return "redirect:/homeLogged?error="+errorMessage;
+            return "redirect:/conversations?error="+errorMessage;
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return"redirect:/homeLogged?error=Nieoczekiwany błąd!";
+        return"redirect:/conversations?error=Nieoczekiwany błąd!";
     }
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
@@ -138,7 +138,7 @@ public class MyController {
             return "redirect:/registrationPage?error=yes&message=" + errorType;
         }
 
-        return "redirect:/homeLogged";
+        return "redirect:/conversations";
     }
 
     @RequestMapping(value = "/delete/{userName}")
