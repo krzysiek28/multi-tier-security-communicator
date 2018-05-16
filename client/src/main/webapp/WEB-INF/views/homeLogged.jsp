@@ -124,11 +124,28 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    ADD FORM
+                    <div id="Wrapper">
+                        <div class="form">
+                            <form action="/conversation/messages/${nazwa}" method="post">
+                                <div class="input-group input-sm">
+                                    <label class="input-group-addon">Podaj nazwę konwersacji:</label>
+                                    <input type="text" class="form-control" id="nazwa" name="nazwa" placeholder="nazwa" required>
+                                </div>
+                                <div class="input-group input-sm">
+                                    <label class="input-group-addon">Podaj hasło do konwersacji:</label>
+                                    <input type="password" class="form-control" id="haslo" name="haslo" placeholder="haslo" />
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                                    <button class="btn btn-secondary" type="submit"> Stwórz </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
-                    <button type="button" class="btn btn-primary" name="joinToConversation" onclick="window.location.href='/'">Dołącz</button>
+                    <button type="button" class="btn btn-primary" name="joinToConversation" onclick="window.location.href='/conversation/messages/${nazwa}'">Dołącz</button>
                 </div>
             </div>
         </div>

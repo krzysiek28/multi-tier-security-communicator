@@ -37,7 +37,7 @@
 </head>
 
 <%--Set refresh, autoload time as 5 seconds--%>
-<% response.setIntHeader("Refresh", 5); %>
+<% response.setIntHeader("Refresh", 200); %>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/homeLogged">Home</a>
